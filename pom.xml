@@ -18,7 +18,7 @@
         <github-password>??</github-password>
 		<!--        <VERSIONS>               -->
 		<serenity.core.version>1.1.26</serenity.core.version>
-		<selenium.core.version>2.51.0</selenium.core.version>
+        <selenium.core.version>2.53.1</selenium.core.version>
 		<serenity.maven.plugin.version>1.1.26</serenity.maven.plugin.version>
 		<serenity.jbehave.version>1.6.0</serenity.jbehave.version>
 		<serenity.jira.version>1.1.2-rc.1</serenity.jira.version>
@@ -92,8 +92,17 @@
 			<version>${serenity.jira.version}</version>
 		</dependency>
     </dependencies>
-		
-	<build>
+
+    <profiles>
+        <profile>
+            <id>firefox</id>
+            <properties>
+                <webdriver.driver>firefox</webdriver.driver>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
 			<plugins>
 				<plugin>
 					<artifactId>maven-failsafe-plugin</artifactId>
@@ -157,15 +166,6 @@
 							<github-password>${github-password}</github-password>
 							<systemProperties>
 								<webdriver.driver>${webdriver.driver}</webdriver.driver>
-								<webdriver.remote.driver>${webdriver.remote.driver}</webdriver.remote.driver>
-								<webdriver.remote.url>${webdriver.remote.url}</webdriver.remote.url>
-								<saucelabs.url>${saucelabs.url}</saucelabs.url>
-								<saucelabs.target.platform>${saucelabs.target.platform}</saucelabs.target.platform>
-								<saucelabs.driver.version>${saucelabs.driver.version}</saucelabs.driver.version>
-								<saucelabs.user.id>${saucelabs.user.id}</saucelabs.user.id>
-								<saucelabs.access.key>${saucelabs.user.key}</saucelabs.access.key>
-								<saucelabs.test.name>${saucelabs.test.name}</saucelabs.test.name>
-								<serenity.driver.capabilities>${serenity.driver.capabilities}</serenity.driver.capabilities>
 							</systemProperties>
 						</systemPropertyVariables>
 					</configuration>
@@ -186,28 +186,5 @@
 				</plugin>
 			</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>firefox</id>
-			<properties>
-				<webdriver.driver>firefox</webdriver.driver>
-			</properties>
-		</profile>
-		<profile>
-			<id>sauce</id>
-			<properties>
-				<webdriver.driver>remote</webdriver.driver>
-				<webdriver.remote.driver>firefox</webdriver.remote.driver>
-				<webdriver.remote.url>http://username:password@ondemand.saucelabs.com:80/wd/hub</webdriver.remote.url>
-				<saucelabs.url>http://username:password?@ondemand.saucelabs.com:80/wd/hub</saucelabs.url>
-				<saucelabs.target.platform>WIN8</saucelabs.target.platform>
-				<saucelabs.driver.version>41</saucelabs.driver.version>
-				<!--saucelabs.driver.version=10-->
-				<saucelabs.user.id>username</saucelabs.user.id>
-				<saucelabs.access.key>password</saucelabs.access.key>
-				<saucelabs.test.name>Fake Run</saucelabs.test.name>
-			</properties>
-		</profile>
-	</profiles>
 </project>
 
